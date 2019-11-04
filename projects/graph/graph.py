@@ -46,6 +46,7 @@ class Graph:
                     q.enqueue(neighbor)
 
 
+
     def dft(self, starting_vertex):
         """
         Print each vertex in depth-first order
@@ -77,21 +78,60 @@ class Graph:
         beginning from starting_vertex.
         This should be done using recursion.
         """
-        pass  # TODO
+        pass
+        
+
+        
+
+
     def bfs(self, starting_vertex, destination_vertex):
         """
         Return a list containing the shortest path from
         starting_vertex to destination_vertex in
         breath-first order.
         """
-        pass  # TODO
+        
+        q = Queue()
+        visited = set()
+        q.enqueue([starting_vertex])
+
+        while q.size() > 0:
+            path = q.dequeue()
+            vertex = path[-1]
+
+            if vertex == destination_vertex:
+                return path
+
+            visited.add(vertex)
+            for next_vertex in self.vertices[vertex]:
+                new_path = list(path)
+                new_path.append(next_vertex)
+                q.enqueue(new_path)
+
+
     def dfs(self, starting_vertex, destination_vertex):
         """
         Return a list containing a path from
         starting_vertex to destination_vertex in
         depth-first order.
         """
-        pass  # TODO
+        s = Stack()
+        visited = set()
+        s.push([starting_vertex])
+
+        while s.size() > 0:
+            path = s.pop()
+            vertex = path[-1]
+
+            if vertex not in visited:
+                if vertex == destination_vertex:
+                    return path
+            
+                visited.add(vertex)
+                for next_vertex in self.vertices[vertex]:
+                    new_path = list(path)
+                    new_path.append(next_vertex)
+                    s.push(new_path)
 
 
 
